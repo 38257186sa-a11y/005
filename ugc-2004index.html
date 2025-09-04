@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>UGC NET 2004 Quiz</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f7f7f7; padding: 20px; }
+    h1 { text-align: center; }
+    #quiz { max-width: 600px; margin: auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    .question { font-weight: bold; margin: 15px 0; }
+    .options button {
+      display: block; width: 100%; margin: 5px 0; padding: 10px;
+      border: 1px solid #ccc; border-radius: 5px; background: #f0f0f0;
+      cursor: pointer; text-align: left;
+    }
+    .options button:hover { background: #e0e0e0; }
+    #result { margin-top: 20px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>UGC NET 2004 Quiz</h1>
+  <div id="quiz"></div>
+  <div id="result"></div>
+
+  <script>
+    let currentQuestion = 0;
+    let score = 0;
+    let questions = [];
+
+    // Load questions from JSON file
+    fetch('questions.json')
+      .then(response => response.json())
+      .then(data => {
+        questions = data;
+        showQuestion();
+      });
+
+    function showQuestion() {
+      if (currentQuestion >= questions.length) {
+        document.getElementById('quiz').innerHTML = "<h2>Quiz Finished!</h2>";
+        document.getElementById('result').innerText = `Your Score: ${score} / ${questions.length}`;
+        return;
+      }
+
+      let q = questions[currentQuestion];
+      let quizDiv = document.getElementById('quiz');
+      quizDiv.innerHTML = `
+        <div class="question">${q.question}</div>
+        <div class="options">
+          ${q.options.map(opt => `<button onclick="checkAnswer('${opt}')">${opt}</button>`).join("")}
+        </div>
+      `;
+    }
+
+    function checkAnswer(selected) {
+      if (selected === questions[currentQuestion].answer) {
+        score++;
+      }
+      currentQuestion++;
+      showQuestion();
+    }
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>UGC NET 2004 Quiz</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f7f7f7; padding: 20px; }
+    h1 { text-align: center; }
+    #quiz { max-width: 600px; margin: auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    .question { font-weight: bold; margin: 15px 0; }
+    .options button {
+      display: block; width: 100%; margin: 5px 0; padding: 10px;
+      border: 1px solid #ccc; border-radius: 5px; background: #f0f0f0;
+      cursor: pointer; text-align: left;
+    }
+    .options button:hover { background: #e0e0e0; }
+    #result { margin-top: 20px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>UGC NET 2004 Quiz</h1>
+  <div id="quiz"></div>
+  <div id="result"></div>
+
+  <script>
+    let currentQuestion = 0;
+    let score = 0;
+    let questions = [];
+
+    // Load questions from JSON file
+    fetch('questions.json')
+      .then(response => response.json())
+      .then(data => {
+        questions = data;
+        showQuestion();
+      });
+
+    function showQuestion() {
+      if (currentQuestion >= questions.length) {
+        document.getElementById('quiz').innerHTML = "<h2>Quiz Finished!</h2>";
+        document.getElementById('result').innerText = `Your Score: ${score} / ${questions.length}`;
+        return;
+      }
+
+      let q = questions[currentQuestion];
+      let quizDiv = document.getElementById('quiz');
+      quizDiv.innerHTML = `
+        <div class="question">${q.question}</div>
+        <div class="options">
+          ${q.options.map(opt => `<button onclick="checkAnswer('${opt}')">${opt}</button>`).join("")}
+        </div>
+      `;
+    }
+
+    function checkAnswer(selected) {
+      if (selected === questions[currentQuestion].answer) {
+        score++;
+      }
+      currentQuestion++;
+      showQuestion();
+    }
+  </script>
+</body>
+</html>
