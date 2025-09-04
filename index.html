@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>UGC NET Quiz Hub</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin: 20px; background: #fafafa; }
+    h1 { color: darkblue; }
+    .subjects { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 20px; }
+    a { text-decoration: none; padding: 10px 20px; border: 1px solid #333; border-radius: 8px; width: 320px; text-align: center; background: #f0f0f0; transition: 0.3s; }
+    a:hover { background: #ddd; }
+  </style>
+</head>
+<body>
+  <h1>UGC NET Quiz Hub</h1>
+  <p>Select a subject or year to begin:</p>
+  <div class="subjects" id="subject-list"></div>
+
+  <script>
+    async function loadSubjects() {
+      const response = await fetch("subjects.json");
+      const subjects = await response.json();
+      const list = document.getElementById("subject-list");
+
+      subjects.forEach(sub => {
+        const link = document.createElement("a");
+        link.href = sub.link;
+        link.textContent = sub.title;
+        list.appendChild(link);
+      });
+    }
+    loadSubjects();
+  </script>
+</body>
+</html>
